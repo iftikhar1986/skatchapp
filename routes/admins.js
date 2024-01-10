@@ -122,7 +122,7 @@ router.post("/Register", async (req, res, next) => {
 router.post("/VerifyEmail", (req, res, next) => {
   values = [
     {
-      Email: req.body.data1.new_email,
+      Email: req.body.data.new_email,
     },
   ];
 
@@ -158,58 +158,60 @@ router.post("/VerifyEmail", (req, res, next) => {
 
 //Admin Login
 router.post("/Login", async (req, res, next) => {
-  values = [
-    {
+  try {
+    const values = {
       email: req.body.l_data.email,
       password: req.body.l_data.password,
       is_login: true,
       last_login: new Date().toISOString(),
-    },
-  ];
-  await models.admins
-    .findAll({
+    };
+
+    const response = await models.admins.findAll({
       where: {
-        email: values[0].email,
+        email: values.email,
       },
-    })
-    .then((data) => {
-        if (data?.length == 0) {
-          console.log("Email or Password incorrect");
-          res.json({
-            successful: false,
-            message: "Email or Password incorrect",
-          });
-        } else {
-          let password_check = bcrypt.compare(
-            req.body.l_data.password,
-            data[0].password
-          );
-          if (password_check) {
-            const accessToken = jwt.sign(
-              {
-                successful: true,
-                message: "Admin Login Successfully.",
-                data: data[0],
-              },
-              accessTokenSecret
-            );
-            res.json({
-              successful: true,
-              message: "Admin Login Successfully.",
-              data: data[0],
-              accessToken: accessToken,
-            });
-          }
-        }
-      })
-      .catch(function (err) {
-        console.log("Request Data is Empty: ", err);
-        res.json({
-          successful: false,
-          message: "Request Data is Empty: " + err,
-        });
+    });
+
+    if (!response || response.length === 0) {
+      console.log("Email or Password incorrect");
+      return res.json({
+        successful: false,
+        message: "Email or Password incorrect",
       });
-  });
+    }
+
+    // Compare passwords directly
+    if (values.password === response[0].password) {
+      const accessToken = jwt.sign(
+        {
+          successful: true,
+          message: "Admin Login Successfully.",
+          data: response[0],
+        },
+        accessTokenSecret
+      );
+
+      return res.json({
+        successful: true,
+        message: "Admin Login Successfully.",
+        data: response[0],
+        accessToken: accessToken,
+      });
+    } else {
+      console.log("Password incorrect");
+      return res.json({
+        successful: false,
+        message: "Password incorrect",
+      });
+    }
+  } catch (err) {
+    console.log("Error:", err);
+    return res.json({
+      successful: false,
+      message: "An error occurred: " + err,
+    });
+  }
+});
 
 //Admin Get Auth
 router.get("/GetAuth", authenticateJWT, (req, res) => {
@@ -247,7 +249,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
         });
       } else {
         const msg = {
-          from: "admin@sokoon.io", // Use the email address or domain you verified above
+          from: "admin@sokoon.qa", // Use the email address or domain you verified above
           personalizations: [
             {
               to: [
@@ -289,7 +291,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
 //Admin Password Reset
 router.post("/PasswordReset", authenticateJWT, async (req, res, next) => {
 
-  console.log("Password Reset API Calling:", req.body.pr_data);
+  console.log("Password Reset API Calling:", req.body.data);
 
   let hashed_pass = "";
 
