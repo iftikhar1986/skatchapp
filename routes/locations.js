@@ -167,116 +167,81 @@ router.get("/Get_Country/:id", (req, res, next) => {
 });
 
 
-//Get Country By Code
-router.get("/Get_CountryByCode/:code", (req, res, next) => {
-  console.log("Get Country Name API calling: ", req.params.id);
-const { code } = req.params;
-
-models.countries
-  .findAll({
-    where: {
-      sortname: code,
-    },
-  })
-  .then((data) => {
-    if (data?.length != 0 || data != null) {
-      console.log("Country Name Get Successfully");
-      res.json({
-        data: data,
-        successful: true,
-        message: "Country Name Get Successfully",
-      });
-    } else {
-      console.log("No Country Found");
-      res.json({
-        successful: false,
-        message: "No Country Found",
-      });
-    }
-  })
-  .catch(function (err) {
-    console.log("Failed To Get Country Name: ", err);
-    res.json({
-      successful: false,
-      message: "Failed To Get Country Name: " + err,
-    });
-  });
-});
 
 //Get State Name
-// router.get("/Get_State/:id", (req, res, next) => {
-//     console.log("Get State Name API calling: ", req.params.id);
-//   const { id } = req.params;
+router.get("/Get_State/:id", (req, res, next) => {
+    console.log("Get State Name API calling: ", req.params.id);
+  const { id } = req.params;
 
-//   models.states
-//     .findAll({
-//       where: {
-//         id: id,
-//       },
-//     })
+  models.states
+    .findAll({
+      where: {
+        id: id,
+      },
+    })
 
-//     .then((data) => {
-//       if (data?.length != 0 || data != null) {
-//         console.log("State Name Get Successfully");
-//         res.json({
-//           data: data,
-//           successful: true,
-//           message: "State Name Get Successfully",
-//         });
-//       } else {
-//         console.log("No State Found");
-//         res.json({
-//           successful: false,
-//           message: "No State Found",
-//         });
-//       }
-//     })
+    .then((data) => {
+      if (data?.length != 0 || data != null) {
+        console.log("State Name Get Successfully");
+        res.json({
+          data: data,
+          successful: true,
+          message: "State Name Get Successfully",
+        });
+      } else {
+        console.log("No State Found");
+        res.json({
+          successful: false,
+          message: "No State Found",
+        });
+      }
+    })
 
-//     .catch(function (err) {
-//       console.log("Failed To Get State Name: ", err);
-//       res.json({
-//         successful: false,
-//         message: "Failed To Get State Name: " + err,
-//       });
-//     });
-// });
+    .catch(function (err) {
+      console.log("Failed To Get State Name: ", err);
+      res.json({
+        successful: false,
+        message: "Failed To Get State Name: " + err,
+      });
+    });
+});
 
-// //Get City Name
-// router.get("/Get_City/:id", (req, res, next) => {
-//     console.log("Get City Name API calling: ", req.params.id);
-//   const { id } = req.params;
+//Get City Name
+router.get("/Get_City/:id", (req, res, next) => {
+    console.log("Get City Name API calling: ", req.params.id);
+  const { id } = req.params;
 
-//   models.cities
-//     .findAll({
-//       where: {
-//         id: id,
-//       },
-//     })
+  models.cities
+    .findAll({
+      where: {
+        id: id,
+      },
+    })
 
-//     .then((data) => {
-//       if (data?.length != 0 || data != null) {
-//         console.log("City Name Get Successfully");
-//         res.json({
-//           data: data,
-//           successful: true,
-//           message: "City Name Get Successfully",
-//         });
-//       } else {
-//         console.log("No City Found");
-//         res.json({
-//           successful: false,
-//           message: "No City Found",
-//         });
-//       }
-//     })
+    .then((data) => {
+      if (data?.length != 0 || data != null) {
+        console.log("City Name Get Successfully");
+        res.json({
+          data: data,
+          successful: true,
+          message: "City Name Get Successfully",
+        });
+      } else {
+        console.log("No City Found");
+        res.json({
+          successful: false,
+          message: "No City Found",
+        });
+      }
+    })
 
-//     .catch(function (err) {
-//       console.log("Failed To Get City Name: ", err);
-//       res.json({
-//         successful: false,
-//         message: "Failed To Get City Name: " + err,
-//       });
-//     });
-// });
+    .catch(function (err) {
+      console.log("Failed To Get City Name: ", err);
+      res.json({
+        successful: false,
+        message: "Failed To Get City Name: " + err,
+      });
+    });
+});
 
 module.exports = router;
