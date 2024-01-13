@@ -145,6 +145,7 @@ router.post("/Create_NewWord", async (req, res, next) => {
 //Update New Word Detail
 router.post("/Update_NewWordDetail", async (req, res, next) => {
     console.log("Update New Word Detail API Calling:", req.body.data);
+    console.log('Word', req.body.data.word);
     values = [
         {
             id: req.body.data.id,
@@ -196,7 +197,53 @@ router.post("/Update_NewWordDetail", async (req, res, next) => {
         });
 });
 
-
+router.post("/Update_NewWordStatus", async (req, res, next) => {
+    console.log("Update New Word Status API Calling:", req.body.data);
+  
+    const { id, isRead } = req.body.data;
+  
+    try {
+      const [_, updatedNewWord] = await models.newWords.update(
+        {
+          isRead,
+          updated_at: new Date().toISOString(),
+        },
+        {
+          where: {
+            id,
+          },
+          returning: true,
+          plain: true,
+          exclude: ["created_at", "updated_at"],
+        }
+      );
+  
+      const accessToken = jwt.sign(
+        {
+          successful: true,
+          message: "newWord Detail Updated Successfully",
+          data: updatedNewWord.dataValues,
+        },
+        accessTokenSecret
+      );
+  
+      console.log("Response Data: ", updatedNewWord.dataValues);
+  
+      res.json({
+        successful: true,
+        message: "Successful",
+        data: updatedNewWord.dataValues,
+        accessToken,
+      });
+    } catch (err) {
+      console.log(err);
+      res.json({
+        message: "Failed" + err,
+        successful: false,
+      });
+    }
+  });
+  
 //Delete Single New Word
 router.get("/Delete_SingleNewWord/:id", (req, res, next) => {
     const { id } = req.params;
