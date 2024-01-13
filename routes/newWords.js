@@ -145,7 +145,7 @@ router.post("/Create_NewWord", async (req, res, next) => {
 //Update New Word Detail
 router.post("/Update_NewWordDetail", async (req, res, next) => {
     console.log("Update New Word Detail API Calling:", req.body.data);
-    console.log('Word', req.body.data.word);
+    console.log('Word is----', req.body.data.word);
     values = [
         {
             id: req.body.data.id,
@@ -200,7 +200,7 @@ router.post("/Update_NewWordDetail", async (req, res, next) => {
 router.post("/Update_NewWordStatus", async (req, res, next) => {
     console.log("Update New Word Status API Calling:", req.body.data);
   
-    const { id, isRead } = req.body.data;
+    const { id, word, referenceisRead } = req.body.data;
   
     try {
       const [_, updatedNewWord] = await models.newWords.update(
