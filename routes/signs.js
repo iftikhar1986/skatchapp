@@ -80,7 +80,7 @@ router.get("/Get_AllSigns", (req, res, next) => {
 
 //Create Sign
 router.post("/Create_Sign", async (req, res, next) => {
-    const {video, url, category, title, is_active } = req.body.data;
+    const {video, url, category, titleEn, titleAr, titleFr, is_active } = req.body.data;
 
     values = [
         {
@@ -97,7 +97,7 @@ router.post("/Create_Sign", async (req, res, next) => {
     await models.signs
         .findAll({
             where: {
-                title: values[0].title,
+                titleEn: values[0].titleEn,
             },
         })
         .then((data) => {
@@ -166,7 +166,9 @@ router.post("/Update_SignDetail", async (req, res, next) => {
                 url: values[0].url,
                 video: values[0].video,
                 category: values[0].category,
-                title: values[0].title,
+                titleEn: values[0].titleEn,
+                titleAr: values[0].titleAr,
+                titleFr: values[0].titleFr,
                 is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
