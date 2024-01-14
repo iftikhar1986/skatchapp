@@ -241,15 +241,16 @@ router.post("/ForgetPassword", async (req, res, next) => {
       }
     )
     .then((data) => {
+      console.log("Response Data: ", data);
       const accessToken = jwt.sign(
         {
             successful: true,
             message: "Admin Password Sent Successfully",
-            data: data[1].id,
+            data: data[1].dataValues,
         },
         accessTokenSecret
       );
-      console.log("Response Data: ", data[1]);
+      console.log("Response Data: ", data);
       res.json({
           successful: true,
           message: "Successful",
