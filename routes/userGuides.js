@@ -158,10 +158,10 @@ router.post("/Update_UserGuideDetail", async (req, res, next) => {
     await models.userGuides
         .update(
             {
-                language: rvalues[0].language,
-                title: rvalues[0].title,
-                picture: rvalues[0].picture,
-                description: rvalues[0].description,
+                language: values[0].language,
+                title: values[0].title,
+                picture: values[0].picture,
+                description: values[0].description,
                 is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
