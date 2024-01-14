@@ -245,15 +245,15 @@ router.post("/ForgetPassword", async (req, res, next) => {
         {
             successful: true,
             message: "Admin Password Sent Successfully",
-            data: data[1].dataValues,
+            data: data[1].id,
         },
         accessTokenSecret
       );
-      console.log("Response Data: ", data[1].dataValues);
+      console.log("Response Data: ", data[1].id);
       res.json({
           successful: true,
           message: "Successful",
-          data: data[1].dataValues,
+          data: data[1].id,
           accessToken,
       });
          
