@@ -386,7 +386,10 @@ const words = db.connection.define("words", {
     catAZEn : Sequelize.STRING,
     catAZFr : Sequelize.STRING,
     video : Sequelize.STRING,
-    categories: Sequelize.STRING,
+    categories: {
+      type: Sequelize.STRING,
+      allowNull: true, // Adjust this based on your model's requirements
+    },
     french : Sequelize.STRING,
     videoUrl : Sequelize.STRING,
     thumbnail : Sequelize.STRING,
