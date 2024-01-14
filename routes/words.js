@@ -80,31 +80,33 @@ router.get("/Get_AllWords", (req, res, next) => {
 //Create Word
 router.post("/Create_Word", async (req, res, next) => {
     const { 
-        catAZAr,
-        arabic,
         english,
+        arabic,
+        french,
         catAZEn,
+        catAZAr,
         catAZFr,
         video,
-        categories,
-        french,
         videoUrl,
         thumbnail,
+        categories,
         is_active 
     } = req.body.data;
 
     values = [
         {
-            catAZAr : req.body.data.catAZAr,
-            arabic : req.body.data.arabic,
+           
+            
             english : req.body.data.english,
+            arabic : req.body.data.arabic,
+            french : req.body.data.french,
             catAZEn : req.body.data.catAZEn,
+            catAZAr : req.body.data.catAZAr,
             catAZFr : req.body.data.catAZFr,
             video : req.body.data.video,
-            categories: req.body.data.categories,
-            french : req.body.data.french,
             videoUrl : req.body.data.videoUrl,
             thumbnail : req.body.data.thumbnail,
+            categories: req.body.data.categories,
             is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
@@ -166,32 +168,33 @@ router.post("/Update_WordDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            catAZAr : req.body.data.catAZAr,
-            arabic : req.body.data.arabic,
             english : req.body.data.english,
+            arabic : req.body.data.arabic,
+            french : req.body.data.french,
             catAZEn : req.body.data.catAZEn,
+            catAZAr : req.body.data.catAZAr,
             catAZFr : req.body.data.catAZFr,
             video : req.body.data.video,
-            categories: req.body.data.categories,
-            french : req.body.data.french,
             videoUrl : req.body.data.videoUrl,
             thumbnail : req.body.data.thumbnail,
+            categories: req.body.data.categories,
             is_active: req.body.data.is_active,
+            
         },
     ];
     await models.words
         .update(
             {
-                catAZAr : values[0].catAZAr,
-                arabic : values[0].arabic,
                 english : values[0].english,
+                arabic : values[0].arabic,
+                french : values[0].french,
                 catAZEn : values[0].catAZEn,
+                catAZAr : values[0].catAZAr,
                 catAZFr : values[0].catAZFr,
                 video : values[0].video,
-                categories: values[0].categories,
-                french : values[0].french,
                 videoUrl : values[0].videoUrl,
                 thumbnail : values[0].thumbnail,
+                categories: values[0].categories,
                 is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
