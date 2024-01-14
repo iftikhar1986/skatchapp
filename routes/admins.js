@@ -22,14 +22,14 @@ sgMail.setApiKey(
 
 //Create Ad
 router.post("/Create_Admin", async (req, res, next) => {
-  const { f_name, l_name, email, password, phone, is_active } = req.body.data;
+  const { f_name, l_name, phone, email, password, is_active } = req.body.data;
 
   values = [
       {
         f_name: req.body.data.f_name,
         l_name: req.body.data.l_name,
-        email: req.body.data.email,
         phone: req.body.data.phone,
+        email: req.body.data.email,
         password: req.body.data.password,
         is_active: req.body.data.is_active,
         created_at: new Date().toISOString(),
