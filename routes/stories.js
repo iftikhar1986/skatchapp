@@ -79,18 +79,17 @@ router.get("/Get_AllStories", (req, res, next) => {
 
 //Create Story
 router.post("/Create_Story", async (req, res, next) => {
-    const { titleFr, titleAr, titleEn, type, url, thumbnail, nbreOfView, is_active } = req.body.data;
+    const { thumbnail, url, titleEn, titleAr,  titleFr, is_active , type} = req.body.data;
 
     values = [
         {
+            thumbnail: req.body.data.thumbnail,
+            url: req.body.data.url,
             titleFr: req.body.data.titleFr,
             titleAr: req.body.data.titleAr,
-            titleEn: req.body.data.titleEn,
-            type: req.body.data.type,
-            url: req.body.data.url,
-            thumbnail: req.body.data.thumbnail,
-            nbreOfView: req.body.data.nbreOfView,
+            titleEn: req.body.data.titleEn,           
             is_active: req.body.data.is_active,
+            type: req.body.data.type,
             created_at: new Date().toISOString(),
         },
     ];
@@ -151,27 +150,25 @@ router.post("/Update_StoryDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            titleFr: req.body.data.titleFr,
-            titleAr: req.body.data.titleAr,
-            titleEn: req.body.data.titleEn,
-            type: req.body.data.type,
-            url: req.body.data.url,
             thumbnail: req.body.data.thumbnail,
-            nbreOfView: req.body.data.nbreOfView,
+            url: req.body.data.url,
+            titleEn: req.body.data.titleEn,
+           titleAr: req.body.data.titleAr,
+            titleFr: req.body.data.titleFr,
             is_active: req.body.data.is_active,
+            type: req.body.data.type,
         },
     ];
     await models.stories
         .update(
             {
-                titleFr: values[0].titleFr,
-                titleAr: values[0].titleAr,
-                titleEn: values[0].titleEn,
-                type: values[0].type,
-                url: values[0].url,
                 thumbnail: values[0].thumbnail,
-                nbreOfView: values[0].nbreOfView,
+                url: values[0].url,
+                titleEn: values[0].titleEn,
+                titleAr: values[0].titleAr,
+                titleFr: values[0].titleFr,
                 is_active: values[0].is_active,
+                type: values[0].type,
                 updated_at: new Date().toISOString(),
             },
             {
