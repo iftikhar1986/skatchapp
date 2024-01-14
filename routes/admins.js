@@ -241,13 +241,22 @@ router.post("/ForgetPassword", async (req, res, next) => {
       }
     )
     .then((data) => {
-      if (data?.length == 0) {
+      const accessToken = jwt.sign(
+        {
+            successful: true,
+            message: "Ad Detail Updated Successfully",
+            data: data[1].dataValues,
+        },
+        accessTokenSecret
+    );
+      
+    
         console.log("Email does not exist");
         res.json({
           successful: false,
           message: "Email does not exist",
         });
-      } else {
+   
         const msg = {
           from: "admin@sokoon.qa", // Use the email address or domain you verified above
           personalizations: [
@@ -277,8 +286,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
           successful: true,
           message: "Email has been sent to your Email address.",
         });
-      }
-    })
+      })
     .catch(function (err) {
       console.log("Failed to Recover Password: ", err);
       res.json({
