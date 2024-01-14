@@ -101,10 +101,10 @@ router.post("/Create_Story", async (req, res, next) => {
         })
         .then((data) => {
             if (data?.length !== 0) {
-                console.log("Story already exists");
+                console.log("Commonly Used Sign already exists");
                 res.json({
                     successful: false,
-                    message: "Story already exists",
+                    message: "Commonly Used Sign already exists",
                 });
             } else {
                 models.stories
@@ -114,23 +114,23 @@ router.post("/Create_Story", async (req, res, next) => {
                             const accessToken = jwt.sign(
                                 {
                                     successful: true,
-                                    message: "Story Created Successfully",
+                                    message: "Commonly Used Sign Created Successfully",
                                     data: x[0],
                                 },
                                 accessTokenSecret
                             );
                             res.json({
                                 successful: true,
-                                message:  "Story Created Successfully",
+                                message:  "Commonly Used Sign Created Successfully",
                                 data: x[0].id,
                             });
                         }
                     })
                     .catch(function (err) {
-                        console.log("Failed to Create New Story: ", err);
+                        console.log("Failed to Create New Commonly Used Sign: ", err);
                         res.json({
                             successful: false,
-                            message: "Failed to Create New Story: " + err,
+                            message: "Failed to Create New Commonly Used Sign: " + err,
                         });
                     });
             }
