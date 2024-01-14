@@ -245,7 +245,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
       const accessToken = jwt.sign(
         {
             successful: true,
-            message: "Admin Password Sent Successfully",
+            message: "Admin Password Updated Successfully",
             data: data,
         },
         accessTokenSecret
@@ -258,35 +258,35 @@ router.post("/ForgetPassword", async (req, res, next) => {
           accessToken,
       });
          
-      const msg = {
-          from: "admin@sokoon.io", // Use the email address or domain you verified above
-          personalizations: [
-            {
-              to: [
-                {
-                  email: email,
-                },
-              ],
-              dynamic_template_data: {},
-            },
-          ],
-          template_id: "d-43d496eb51b34406a077fa962948470c",
-        };
+      // const msg = {
+      //     from: "admin@sokoon.io", // Use the email address or domain you verified above
+      //     personalizations: [
+      //       {
+      //         to: [
+      //           {
+      //             email: email,
+      //           },
+      //         ],
+      //         dynamic_template_data: {},
+      //       },
+      //     ],
+      //     template_id: "d-43d496eb51b34406a077fa962948470c",
+      //   };
 
-        sgMail.send(msg).then(
-          () => {},
-          (error) => {
-            console.error(error);
-            if (error.response) {
-              console.error("Email Send Failed: ", error.response.body);
-            }
-          }
-        );
+      //   sgMail.send(msg).then(
+      //     () => {},
+      //     (error) => {
+      //       console.error(error);
+      //       if (error.response) {
+      //         console.error("Email Send Failed: ", error.response.body);
+      //       }
+      //     }
+      //   );
 
-        res.json({
-          successful: true,
-          message: "Email has been sent to your Email address.",
-        });
+        // res.json({
+        //   successful: true,
+        //   message: "Email has been sent to your Email address.",
+        // });
       })
     .catch(function (err) {
       console.log("Failed to Recover Password: ", err);
