@@ -49,7 +49,7 @@ router.post("/Create_Admin", async (req, res, next) => {
                   message: "Admin already exists",
               });
           } else {
-              models.ads
+              models.admins
                   .bulkCreate(values)
                   .then((x) => {
                       if (x?.length !== 0) {
