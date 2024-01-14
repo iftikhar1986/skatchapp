@@ -249,7 +249,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
         },
         accessTokenSecret
       );
-      console.log("Response Data: ", data[1].id);
+      console.log("Response Data: ", data[1]);
       res.json({
           successful: true,
           message: "Successful",
