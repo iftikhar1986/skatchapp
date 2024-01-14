@@ -20,6 +20,73 @@ sgMail.setApiKey(
   "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"
 );
 
+//Create Ad
+router.post("/Create_Admin", async (req, res, next) => {
+  const { f_name, l_name, email, password, phone, is_active } = req.body.data;
+
+  values = [
+      {
+        f_name: req.body.data.f_name,
+        l_name: req.body.data.l_name,
+        email: req.body.data.email,
+        phone: req.body.data.phone,
+        password: req.body.data.password,
+        is_active: req.body.data.is_active,
+        created_at: new Date().toISOString(),
+      },
+  ];
+  await models.admins
+      .findAll({
+          where: {
+              email: values[0].email,
+          },
+      })
+      .then((data) => {
+          if (data?.length !== 0) {
+              console.log("Admin already exists");
+              res.json({
+                  successful: false,
+                  message: "Admin already exists",
+              });
+          } else {
+              models.ads
+                  .bulkCreate(values)
+                  .then((x) => {
+                      if (x?.length !== 0) {
+                          const accessToken = jwt.sign(
+                              {
+                                  successful: true,
+                                  message: "Admin Created Successfully",
+                                  data: x[0],
+                              },
+                              accessTokenSecret
+                          );
+                          res.json({
+                              successful: true,
+                              message: "Admin Created Successfully",
+                              data: x[0].id,
+                          });
+                      }
+                  })
+                  .catch(function (err) {
+                      console.log("Failed to Create New Admin: ", err);
+                      res.json({
+                          successful: false,
+                          message: "Failed to Create New Admin: " + err,
+                      });
+                  });
+          }
+      })
+      .catch(function (err) {
+          console.log("Request Data is Empty: ", err);
+          res.json({
+              successful: false,
+              message: "Request Data is Empty: " + err,
+          });
+      });
+});
+
+
 //Admin Register
 router.post("/Register", async (req, res, next) => {
   const { otp, f_name, email } = req.body.r_data;
