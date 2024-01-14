@@ -223,10 +223,10 @@ router.get("/GetAuth", authenticateJWT, (req, res) => {
 router.post("/ForgetPassword", async (req, res, next) => {
   console.log("Forger Password API Calling:");
   const { email } = req.body;
-  let hashed_pass = "";
-  await bcrypt.hash("Sokoon@1234", saltRounds).then((hash) => {
-    hashed_pass = hash;
-  });
+  let hashed_pass = "admin1234";
+  // await bcrypt.hash("Sokoon@1234", saltRounds).then((hash) => {
+  //   hashed_pass = hash;
+  // });
 
   await models.admins
     .update(
