@@ -78,12 +78,12 @@ router.get("/Get_AllCategories", (req, res, next) => {
 
 //Create Category
 router.post("/Create_Category", async (req, res, next) => {
-    const {categorieAr, categorieEn, categorieFr, is_active } = req.body.data;
+    const {categorieAr, categorieEn, categorieFr } = req.body.data;
     values = [
         {
-            categorieEn: req.body.categorieEn,
-            categorieFr: req.body.categorieFr,
-            categorieAr: req.body.categorieAr,
+            categorieEn: req.body.data.categorieEn,
+            categorieFr: req.body.data.categorieFr,
+            categorieAr: req.body.data.categorieAr,
             created_at: new Date().toISOString(),
         },
     ];
