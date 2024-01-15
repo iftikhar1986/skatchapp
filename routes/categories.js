@@ -116,7 +116,7 @@ router.post("/Create_Category", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Category",
+                                message: "Category Created Successfully",
                                 data: x[0].id,
                             });
                         }
