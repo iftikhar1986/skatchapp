@@ -50,7 +50,7 @@ router.get("/Get_SinglePartner/:wd_id", (req, res, next) => {
 router.get("/Get_AllPartners", (req, res, next) => {
     models.partners
         .findAll({
-            order: [["created_at", "DESC"]],
+           
         })
         .then((data) => {
             if (data?.length > 0) {
