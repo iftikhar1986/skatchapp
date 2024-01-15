@@ -111,6 +111,7 @@ const updateWordsRoutes = require("./routes/updateWords");
 const userGuidesRoutes = require("./routes/userGuides");
 const usersRoutes = require("./routes/users");
 const wordsRoutes = require("./routes/words");
+const partnersRoutes = require("./routes/partners");
 
 
 app.use("/admins", adminRoutes);
@@ -129,3 +130,4 @@ app.use("/updatewords", updateWordsRoutes);
 app.use("/userGuides", userGuidesRoutes);
 app.use("/users", usersRoutes);
 app.use("/words", wordsRoutes);
+app.use("/partners", partnersRoutes);

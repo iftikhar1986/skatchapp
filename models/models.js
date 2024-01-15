@@ -79,18 +79,18 @@ const ads = db.connection.define("ads", {
 //   updated_at: Sequelize.DATE,
 // });
 
-// const catAZs = db.connection.define("catAZs", {
-//   id: {
-//     allowNull: false,
-//     autoIncrement: true,
-//     primaryKey: true,
-//     type: Sequelize.INTEGER,
-//   },
-//   cat: Sequelize.STRING,
-//   is_active: Sequelize.BOOLEAN,
-//   created_at: Sequelize.DATE,
-//   updated_at: Sequelize.DATE,
-// });
+const partners = db.connection.define("partners", {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+  },
+  image: Sequelize.STRING,
+  url: Sequelize.STRING,
+  created_at: Sequelize.DATE,
+  updated_at: Sequelize.DATE,
+});
 
 const categories = db.connection.define("categories", {
   id: {
@@ -515,7 +515,7 @@ module.exports.countries = countries;
 module.exports.social_profiles = social_profiles;
 module.exports.ads = ads;
 // module.exports.catArAZs = catArAZs;
-// module.exports.catAZs = catAZs;
+module.exports.partners = partners;
 module.exports.categories = categories;
 module.exports.guides = guides;
 module.exports.newWords = newWords;
