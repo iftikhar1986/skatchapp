@@ -84,7 +84,6 @@ router.post("/Create_Category", async (req, res, next) => {
             categorieEn: req.body.categorieEn,
             categorieFr: req.body.categorieFr,
             categorieAr: req.body.categorieAr,
-            is_active: req.body.is_active,
             created_at: new Date().toISOString(),
         },
     ];
@@ -149,7 +148,6 @@ router.post("/Update_CategoryDetail", async (req, res, next) => {
             categorieEn: req.body.data.categorieEn,
             categorieFr: req.body.data.categorieFr,
             categorieAr: req.body.data.categorieAr,
-            is_active: req.body.data.is_active,
         },
     ];
     await models.categories
@@ -158,7 +156,6 @@ router.post("/Update_CategoryDetail", async (req, res, next) => {
                 categorieEn: values[0].categorieEn,
                 categorieFr: values[0].categorieFr,
                 categorieAr: values[0].categorieAr,
-                is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
             {
@@ -167,7 +164,6 @@ router.post("/Update_CategoryDetail", async (req, res, next) => {
                 },
                 returning: true,
                 plain: true,
-                exclude: ["created_at", "updated_at"],
             }
         )
         .then((data) => {
