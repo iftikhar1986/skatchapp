@@ -16,7 +16,8 @@ router.get("/Get_SingleFeedback/:fb_id", (req, res, next) => {
         .findAll({
             where: {
                 id: fb_id,
-            }
+            },
+           
         })
 
         .then((data) => {

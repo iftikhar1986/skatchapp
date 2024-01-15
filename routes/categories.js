@@ -93,6 +93,7 @@ router.post("/Create_Category", async (req, res, next) => {
             where: {
                 categorieEn: values[0].categorieEn,
             },
+            
         })
         .then((data) => {
             if (data?.length !== 0) {

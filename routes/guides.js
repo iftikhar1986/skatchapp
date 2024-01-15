@@ -14,6 +14,7 @@ router.get("Get_SingleGuide/:g_id", (req, res, next) => {
             where: {
                 id: g_id,
             }, 
+           
         })
         .then((data) => {
             if (data?.length !== 0) {
