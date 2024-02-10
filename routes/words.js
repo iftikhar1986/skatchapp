@@ -46,6 +46,45 @@ router.get("/Get_SingleWord/:wd_id", (req, res, next) => {
         });
 });
 
+//Get Words by Category Id
+router.get("/Get_WordsByCategoryId/:cat_id", (req, res, next) => {
+    const {cat_id } = req.params;
+
+    models.words
+        .findAll({
+            where: {
+                categories:{
+                    [Op.like]: '%${cat_id}%',
+                },
+            }
+        })
+
+        .then((data) => {
+            if (data?.length != 0) {
+                console.log("Word Get Successfully");
+                res.json({
+                    data: data,
+                    successful: true,
+                    message: "Word Get Successfully",
+                });
+            } else {
+                console.log("No Word Found");
+                res.json({
+                    successful: false,
+                    message: "No Word Found",
+                });
+            }
+        })
+
+        .catch(function (err) {
+            console.log("Failed To Get Word: ", err);
+            res.json({
+                successful: false,
+                message: "Failed To Get Word: " + err,
+            });
+        });
+});
+
 //Get All Words
 router.get("/Get_AllWords", (req, res, next) => {
     models.words
