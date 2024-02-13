@@ -46,8 +46,6 @@ router.get("/Get_SingleWord/:wd_id", (req, res, next) => {
         });
 });
 
-const { Op } = require("sequelize");
-
 // Assuming you have a Sequelize model named 'Word'
 router.get("/Get_WordsByCategoryId/:cat_id", async (req, res, next) => {
     const { cat_id } = req.params;
