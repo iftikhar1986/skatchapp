@@ -46,44 +46,44 @@ router.get("/Get_SingleWord/:wd_id", (req, res, next) => {
         });
 });
 
-//Get Words by Category Id
-router.get("/Get_WordsByCategoryId/:cat_id", (req, res, next) => {
-    const {cat_id } = req.params;
+const { Op } = require("sequelize");
 
-    models.words
-        .findAll({
+// Assuming you have a Sequelize model named 'Word'
+router.get("/Get_WordsByCategoryId/:cat_id", async (req, res, next) => {
+    const { cat_id } = req.params;
+
+    try {
+        const data = await models.words.findAll({
             where: {
-                categories:{
-                    [Op.like]: '%${cat_id}%',
+                categories: {
+                    [Op.like]: `%${cat_id}%`,
                 },
-            }
-        })
+            },
+        });
 
-        .then((data) => {
-            if (data?.length != 0) {
-                console.log("Word Get Successfully");
-                res.json({
-                    data: data,
-                    successful: true,
-                    message: "Word Get Successfully",
-                });
-            } else {
-                console.log("No Word Found");
-                res.json({
-                    successful: false,
-                    message: "No Word Found",
-                });
-            }
-        })
-
-        .catch(function (err) {
-            console.log("Failed To Get Word: ", err);
+        if (data.length !== 0) {
+            console.log("Words retrieved successfully");
+            res.json({
+                data: data,
+                successful: true,
+                message: "Words retrieved successfully",
+            });
+        } else {
+            console.log("No words found");
             res.json({
                 successful: false,
-                message: "Failed To Get Word: " + err,
+                message: "No words found",
             });
+        }
+    } catch (err) {
+        console.log("Failed to retrieve words: ", err);
+        res.json({
+            successful: false,
+            message: "Failed to retrieve words: " + err,
         });
+    }
 });
+
 
 //Get All Words
 router.get("/Get_AllWords", (req, res, next) => {
